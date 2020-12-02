@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
+  m_Name: PhotonServerSettings
+  m_EditorClassIdentifier: 
+  AppSettings:
+    AppIdRealtime: a99457e7-a5ff-46b7-86e6-e32b60c3e30e
+    AppIdChat: 
+    AppIdVoice: 
+    AppVersion: 
+    UseNameServer: 1
+    FixedRegion: 
+    Server: 
+    Port: 0
+    Protocol: 0
+    AuthMode: 0
+    EnableLobbyStatistics: 0
+    NetworkLogging: 1
+  DevRegion: in
+  PunLogging: 0
+  EnableSupportLogger: 0
+  RunInBackground: 1
+  StartInOfflineMode: 0
+  RpcList:
+  - ClickRpc
+  - DestroyRpc
+  - DestroySpaceship
+  - Fire
+  - RespawnSpaceship
+  - RPC_sendcards
+  - RPC_sendcards2
+  - RPC_sendcards1
+  - RPC_sendcards3
+  - RPC_sendcards4
+  - RPC_compare
+  - RPC_compareothers
+  - RPC_compareturn
+  - RPC_turn
+  - RPC_compareothers0
+  - RPC_compareothers1
+  - RPC_compareothers2
+  - RPC_compareothers3
+  - RPC_showallcards
+  - RPC_wonmessage
+  - RPC_nextturn
+  - RPC_randomizecards
+  - RPC_initialturn
+  - RPC_sendCards
+  - RPC_chosenTrait
+  - nextCards
+  - RPC_roundtoall
+  - RPC_nextturn0
+  - RPC_nextturn1
+  - RPC_nextturn2
+  - RPC_nextturn3
+  DisableAutoOpenWizard: 1
+  ShowSettings: 0
+  DevRegionSetOnce: 1
