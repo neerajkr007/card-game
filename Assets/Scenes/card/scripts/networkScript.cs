@@ -38,23 +38,32 @@ public class networkScript : MonoBehaviour
         if(p == ogCards.Length / PhotonNetwork.CurrentRoom.PlayerCount)
         {
             //Debug.Log("runs");
-            StartCoroutine(displayCards(0));
+            displayCards();
 
         }
     }
 
-    IEnumerator displayCards(int t)
+    void displayCards()
     {
-        yield return new WaitForSeconds(t);
+        //yield return new WaitForSeconds(0f);
         Debug.Log("displaycards clear");
         l = UnityEngine.Random.Range(0, (ogCards.Length / PhotonNetwork.CurrentRoom.PlayerCount)-round);
         Debug.Log(l + " l");
-        if (PhotonNetwork.PlayerList[1].IsLocal)
+
+        cardviz[round].card = randomcards[l];
+        displayableCard[round].SetActive(true);
+
+        /*if (PhotonNetwork.PlayerList[0].IsLocal)
         {
             cardviz[round].card = randomcards[l];
             displayableCard[round].SetActive(true);
         }
-            Debug.Log("rpc just about to be sent");
+        else if (PhotonNetwork.PlayerList[1].IsLocal)
+        {
+            cardviz[round].card = randomcards[l];
+            displayableCard[round].SetActive(true);
+        }*/
+        Debug.Log("rpc just about to be sent");
 
             sendrpcs();
         
@@ -113,11 +122,17 @@ public class networkScript : MonoBehaviour
     {
         Debug.Log(round+" round " + PhotonNetwork.LocalPlayer.NickName);
         var num = randomcards.ToList();
-        if(PhotonNetwork.PlayerList[1].IsLocal)
+        n = cardviz[round - 1].card.cardId;
+        Debug.Log(n);
+        /*if (PhotonNetwork.PlayerList[1].IsLocal)
+        {
+            
+        }
+        if (PhotonNetwork.PlayerList[0].IsLocal)
         {
             n = cardviz[round - 1].card.cardId;
             Debug.Log(n);
-        }
+        }*/
         for (int q = 0; q <= (ogCards.Length / PhotonNetwork.CurrentRoom.PlayerCount) - round; q++)
         {
             Debug.Log(randomcards[q]);
@@ -130,7 +145,7 @@ public class networkScript : MonoBehaviour
                 randomcards = num.ToArray();
                 //Debug.Log(randomcards.Length);
                 Debug.Log("displaycards about to be run");
-                StartCoroutine(displayCards(0));
+                displayCards();
                 return;
             }
             
@@ -244,7 +259,6 @@ public class networkScript : MonoBehaviour
             clicked[1] = true;
             pv.RPC("RPC_chosenTrait", RpcTarget.AllBuffered, playerName, trait);
             traits.SetActive(false);
-            //Thread.Sleep(timeout);
             pv.RPC("RPC_compareturn", RpcTarget.MasterClient, clicked[0], clicked[1], clicked[2], clicked[3]);
             clicked[1] = false;
         }
@@ -289,7 +303,6 @@ public class networkScript : MonoBehaviour
     [PunRPC]
     void RPC_initialturn(int n)
     {
-        //Debug.Log("initialturn clear");
         traitclicks();
         turn = n;
         if (PhotonNetwork.PlayerList[turn].IsLocal)
@@ -321,7 +334,7 @@ public class networkScript : MonoBehaviour
             }
         }
 
-        if (PhotonNetwork.PlayerList[1].IsLocal)
+        /*if (PhotonNetwork.PlayerList[1].IsLocal)
         {
             Debug.Log("next card about to run");
             round = r;
@@ -340,7 +353,7 @@ public class networkScript : MonoBehaviour
             }
         }
 
-        if (PhotonNetwork.PlayerList[2].IsLocal)
+        //if (PhotonNetwork.PlayerList[2].IsLocal)
         {
             Debug.Log("next card about to run");
             round = r;
@@ -357,7 +370,7 @@ public class networkScript : MonoBehaviour
                     turns();
                 }
             }
-        }
+        }*/
     }
 
     [PunRPC]

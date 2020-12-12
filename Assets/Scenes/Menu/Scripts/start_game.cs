@@ -20,30 +20,11 @@ public class start_game : MonoBehaviour
     }
     public void check()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == slider.value)
+        //if (PhotonNetwork.CurrentRoom.PlayerCount == slider.value)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             tobedisabled.SetActive(false);
             tobeenabled.SetActive(true);
         }
-        /*if (PhotonNetwork.CurrentRoom.PlayerCount == slider.value)
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                button.SetActive(true);
-            }
-        }*/
     }
-
-    /*public void change()
-    {
-        for(int i = 0; i<4; i++)
-        {
-            if(PhotonNetwork.PlayerList[i].IsLocal)
-            {
-                
-            }
-        }
-        
-    }*/
 }

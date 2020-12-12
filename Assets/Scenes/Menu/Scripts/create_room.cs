@@ -12,7 +12,6 @@ public class create_room : MonoBehaviourPunCallbacks
     public Slider slider;
     public GameObject tobeenabled;
     public GameObject tobedisabled;
-
     //public TMPro.TMP_Text msg1;
     //public TMPro.TMP_Text msg2;
 
@@ -23,7 +22,6 @@ public class create_room : MonoBehaviourPunCallbacks
     }
     public void createroom()
     {
-       
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = (byte)slider.value;
         PhotonNetwork.CreateRoom(id, options, TypedLobby.Default);
@@ -33,7 +31,7 @@ public class create_room : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("created successfully");
-        PhotonNetwork.LocalPlayer.NickName = playername.GetComponent<TMPro.TMP_Text>().text;
+        
         tobedisabled.SetActive(false);
         tobeenabled.SetActive(true);
     }

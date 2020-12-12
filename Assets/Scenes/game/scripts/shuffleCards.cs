@@ -37,9 +37,6 @@ public class shuffleCards : MonoBehaviourPunCallbacks
         {
             turn = UnityEngine.Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
             pv1.RPC("RPC_initialturn", RpcTarget.AllBuffered, turn);
-            //pv2.RPC("RPC_turn", RpcTarget.AllBuffered, turn);
-            //pv3.RPC("RPC_turn", RpcTarget.AllBuffered, turn);
-            //pv4.RPC("RPC_turn", RpcTarget.AllBuffered, turn);
             for (int i = 0; i < cards.Length; i++)
             {
                 j = UnityEngine.Random.Range(0, PhotonNetwork.CurrentRoom.PlayerCount);
@@ -48,7 +45,7 @@ public class shuffleCards : MonoBehaviourPunCallbacks
                     case 0:
                         if (a < cards.Length / PhotonNetwork.CurrentRoom.PlayerCount)
                         {
-                            Debug.Log((i + 1) + " a");
+                            //Debug.Log((i + 1) + " a");
                             player1[a] = cards[i];
                             pv1.RPC("RPC_sendcards1", RpcTarget.AllBuffered, i); 
                             a++;
@@ -61,7 +58,7 @@ public class shuffleCards : MonoBehaviourPunCallbacks
                     case 1:
                         if (b < cards.Length / PhotonNetwork.CurrentRoom.PlayerCount)
                         {
-                            Debug.Log((i + 1) + " b");
+                            //Debug.Log((i + 1) + " b");
                             //Invoke("wait", 1);
                             player2[b] = cards[i];
                             pv1.RPC("RPC_sendcards2", RpcTarget.AllBuffered, i);
@@ -79,7 +76,7 @@ public class shuffleCards : MonoBehaviourPunCallbacks
                     case 2:
                         if (c < cards.Length / PhotonNetwork.CurrentRoom.PlayerCount)
                         {
-                            Debug.Log((i + 1) + " c");
+                            //Debug.Log((i + 1) + " c");
                             player3[c] = cards[i];
                             pv1.RPC("RPC_sendcards3", RpcTarget.AllBuffered, i);
                             c++;
@@ -96,7 +93,7 @@ public class shuffleCards : MonoBehaviourPunCallbacks
                     case 3:
                         if (d < cards.Length / PhotonNetwork.CurrentRoom.PlayerCount)
                         {
-                            Debug.Log((i + 1) + " d");
+                            //Debug.Log((i + 1) + " d");
                             pv1.RPC("RPC_sendcards4", RpcTarget.AllBuffered, i);
                             player4[d] = cards[i];
                             d++;
@@ -122,14 +119,14 @@ public class shuffleCards : MonoBehaviourPunCallbacks
             showcard2[r-1].SetActive(false);
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
         {
             showcard1[r-1].SetActive(false);
             showcard2[r-1].SetActive(false);
             showcard3[r-1].SetActive(false);
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 4)
+        else if (PhotonNetwork.CurrentRoom.PlayerCount == 4)
         {
             showcard1[r - 1].SetActive(false);
             showcard2[r - 1].SetActive(false);
@@ -167,11 +164,16 @@ public class shuffleCards : MonoBehaviourPunCallbacks
         Debug.Log(turn + " t " + r);
     }
 
+    IEnumerator wonMsg(string s)
+    {
+        yield return new WaitForSeconds(3);
+        won.text = s;
+    }
+
     [PunRPC]
-    void RPC_roundtoall(int round, int i)
+    public void RPC_roundtoall(int round, int i)
     {
         Debug.Log(round + " round");
-        //Debug.Log(r + " r before");
         r = round;
         turn = i;
     }
@@ -189,7 +191,6 @@ public class shuffleCards : MonoBehaviourPunCallbacks
                 float[] a = new float[2] { cards[m].strength, cards[n].strength};
                 var b = a.ToList();
                 float max = b.Max();
-                //Debug.Log(b.IndexOf(max));
                 turn = (int)b.IndexOf(max);
                 pv.RPC("RPC_wonmessage", RpcTarget.AllBuffered, PhotonNetwork.PlayerList[(int)b.IndexOf(max)].NickName + " won!!!");
             }
@@ -340,11 +341,10 @@ public class shuffleCards : MonoBehaviourPunCallbacks
     }       
 
     [PunRPC]
-    void RPC_chosenTrait(string playerName, string trait)
+    public void RPC_chosenTrait(string playerName, string trait)
     {
         
         won.text = playerName + " chose " + trait;
-        //Debug.Log(won.text);
     }
 
     [PunRPC]
@@ -352,14 +352,6 @@ public class shuffleCards : MonoBehaviourPunCallbacks
     {
         StartCoroutine(wonMsg(s));
         StartCoroutine(deleteCards());
-        //Invoke("deleteCards", 5);
-    }
-
-    IEnumerator wonMsg(string s)
-    {
-        yield return new WaitForSeconds(3);
-        won.text = s;
-        //Debug.Log(won.text);
     }
 
     [PunRPC]
