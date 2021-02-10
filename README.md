@@ -3,9 +3,9 @@
 basic card comparison game with multiplayer functionality
 
 main menu -
-<img src="/ss/1.jpg" height="800" width="450">
+<img src="/ss/1.jpg" height="500" width="250">
 create room options -
-<img src="./ss/2.jpg" height="800" width="450">
+<img src="./ss/2.jpg" height="500" width="200">
 room created -
 ![](/ss/3.jpg)
 another player joins the room -
